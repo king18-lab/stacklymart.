@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Categories</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f6f8;
+padding:30px 20px;
+}
+
+/* SECTION */
+.stackly-section{
+margin-bottom:50px;
+}
+
+.stackly-heading{
+font-size:20px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+/* CATEGORY ROW */
+.stackly-row{
+display:flex;
+gap:20px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding-bottom:10px;
+}
+
+.stackly-row::-webkit-scrollbar{
+height:6px;
+}
+.stackly-row::-webkit-scrollbar-thumb{
+background:#ddd;
+border-radius:10px;
+}
+
+/* CARD */
+.stackly-cat-card{
+min-width:130px;
+background:#fff;
+border-radius:14px;
+padding:15px;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+cursor:pointer;
+transition:0.3s;
+}
+
+.stackly-cat-card:hover{
+transform:translateY(-5px);
+}
+
+.stackly-cat-card img{
+width:80px;
+height:80px;
+object-fit:contain;
+margin-bottom:10px;
+}
+
+.stackly-cat-card p{
+font-size:13px;
+font-weight:500;
+}
+
+/* DESKTOP CENTER ALIGN */
+@media(min-width:1000px){
+.stackly-row{
+justify-content:flex-start;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= FASHION ================= -->
+<div class="stackly-section">
+<div class="stackly-heading">Fashion</div>
+
+<div class="stackly-row">
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?tshirt">
+<p>Men T-Shirts</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?dress">
+<p>Women Dresses</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?shoes">
+<p>Footwear</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?jeans">
+<p>Jeans</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?jacket">
+<p>Jackets</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?handbag">
+<p>Accessories</p>
+</div>
+
+</div>
+</div>
+
+<!-- ================= PHARMA ================= -->
+<div class="stackly-section">
+<div class="stackly-heading">Pharma</div>
+
+<div class="stackly-row">
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?medicine">
+<p>Medicines</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?vitamins">
+<p>Vitamins</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?mask">
+<p>Masks</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?thermometer">
+<p>Thermometers</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?sanitizer">
+<p>Sanitizers</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?bandage">
+<p>First Aid</p>
+</div>
+
+</div>
+</div>
+
+<!-- ================= FRESH ================= -->
+<div class="stackly-section">
+<div class="stackly-heading">Fresh</div>
+
+<div class="stackly-row">
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?vegetables">
+<p>Vegetables</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?fruits">
+<p>Fruits</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?milk">
+<p>Dairy</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?chicken">
+<p>Chicken</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?fish">
+<p>Fish</p>
+</div>
+
+<div class="stackly-cat-card" onclick="go404()">
+<img src="https://source.unsplash.com/100x100/?bread">
+<p>Bakery</p>
+</div>
+
+</div>
+</div>
+
+<script>
+function go404(){
+window.location.href="404.html";
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Brand Section</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#eef1f6;
+}
+
+/* SECTION */
+.stackly-brand-section{
+min-height:80vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:60px 10%;
+background:#e9edf3;
+}
+
+/* MAIN HEADING */
+.stackly-main-title{
+font-size:64px;
+font-weight:800;
+color:#8a94a6;
+line-height:1.1;
+max-width:900px;
+}
+
+/* SUB TEXT */
+.stackly-sub-text{
+margin-top:30px;
+font-size:28px;
+color:#6b7280;
+font-weight:600;
+}
+
+.stackly-highlight{
+color:#7b2cbf;
+}
+
+.stackly-heart{
+color:red;
+margin-left:6px;
+}
+
+/* FOOTER INFO */
+.stackly-footer-info{
+margin-top:60px;
+font-size:18px;
+color:#111;
+display:flex;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.stackly-cert{
+font-weight:600;
+color:#ff4d00;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+.stackly-main-title{
+font-size:36px;
+}
+
+.stackly-sub-text{
+font-size:18px;
+}
+
+.stackly-footer-info{
+font-size:14px;
+margin-top:40px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="stackly-brand-section">
+
+<h1 class="stackly-main-title">
+The place that fits all <br> your needs
+</h1>
+
+<p class="stackly-sub-text">
+Crafted with love from 
+<span class="stackly-highlight">Stackly Team</span>
+<span class="stackly-heart">❤️</span>
+</p>
+
+<div class="stackly-footer-info">
+<span class="stackly-cert">STACKLY Certified</span>
+<span>License No - 2026STKLY9900872</span>
+</div>
+
+</section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Mart - How It Works</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f3f4f6;
+}
+
+/* SECTION */
+.stackly-how-section{
+padding:80px 10%;
+text-align:center;
+}
+
+.stackly-how-title{
+font-size:28px;
+font-weight:700;
+margin-bottom:50px;
+color:#111;
+}
+
+/* GRID */
+.stackly-how-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+/* CARD */
+.stackly-how-card{
+background:#fff;
+padding:40px 30px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.stackly-how-card:hover{
+transform:translateY(-8px);
+}
+
+/* ICON */
+.stackly-icon{
+font-size:50px;
+margin-bottom:20px;
+}
+
+/* TITLE */
+.stackly-card-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+/* TEXT */
+.stackly-card-text{
+font-size:14px;
+color:#555;
+line-height:1.6;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.stackly-how-grid{
+grid-template-columns:1fr;
+}
+.stackly-how-section{
+padding:60px 20px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="stackly-how-section">
+
+<h2 class="stackly-how-title">How Stackly Mart Works</h2>
+
+<div class="stackly-how-grid">
+
+<!-- STEP 1 -->
+<div class="stackly-how-card">
+<div class="stackly-icon">📱</div>
+<div class="stackly-card-title">Open Stackly App</div>
+<div class="stackly-card-text">
+Browse from thousands of groceries, fresh fruits, vegetables, fashion, pharma & more.
+</div>
+</div>
+
+<!-- STEP 2 -->
+<div class="stackly-how-card">
+<div class="stackly-icon">🛒</div>
+<div class="stackly-card-title">Place Your Order</div>
+<div class="stackly-card-text">
+Add your favourite products to cart & enjoy best deals with secure checkout.
+</div>
+</div>
+
+<!-- STEP 3 -->
+<div class="stackly-how-card">
+<div class="stackly-icon">🚚</div>
+<div class="stackly-card-title">Fast Delivery</div>
+<div class="stackly-card-text">
+Experience lightning-fast delivery and get everything delivered to your doorstep in minutes.
+</div>
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Customer Reviews</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f8f5f2;
+padding:60px 20px;
+}
+
+/* SECTION */
+.stackly-review-section{
+max-width:1300px;
+margin:auto;
+text-align:center;
+}
+
+.stackly-review-heading{
+font-size:28px;
+font-weight:700;
+margin-bottom:50px;
+color:#111;
+}
+
+/* GRID */
+.stackly-review-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+/* CARD */
+.stackly-review-card{
+background:#fff;
+border-radius:20px;
+padding:20px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+transition:0.3s;
+}
+
+.stackly-review-card:hover{
+transform:translateY(-6px);
+}
+
+/* REVIEW BOX */
+.stackly-review-text{
+background:linear-gradient(135deg,#ffe7a3,#ffd66b);
+padding:15px;
+border-radius:16px;
+font-size:14px;
+margin-bottom:15px;
+position:relative;
+}
+
+.stackly-review-text::after{
+content:"";
+position:absolute;
+bottom:-10px;
+left:20px;
+width:20px;
+height:20px;
+background:#ffd66b;
+transform:rotate(45deg);
+}
+
+/* NAME */
+.stackly-review-name{
+font-size:13px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+/* IMAGE */
+.stackly-review-card img{
+width:100%;
+border-radius:14px;
+margin-top:10px;
+height:180px;
+object-fit:cover;
+}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+.stackly-review-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:600px){
+.stackly-review-grid{
+grid-template-columns:1fr;
+}
+.stackly-review-heading{
+font-size:20px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="stackly-review-section">
+
+<h2 class="stackly-review-heading">
+Rated 4.3★ by thousands of happy Stackly customers
+</h2>
+
+<div class="stackly-review-grid">
+
+<!-- CARD 1 -->
+<div class="stackly-review-card">
+<div>
+<div class="stackly-review-name">Prakriti J, 25</div>
+<div class="stackly-review-text">
+I absolutely love the mini butter croissants from Stackly Cafe. Fresh, tasty and easy to share!
+</div>
+</div>
+<img src="https://source.unsplash.com/400x300/?croissant">
+</div>
+
+<!-- CARD 2 -->
+<div class="stackly-review-card">
+<div>
+<div class="stackly-review-name">Sagar A, 27</div>
+<div class="stackly-review-text">
+Stackly Cafe has become my morning coffee run. Convenient and addictive!
+</div>
+</div>
+<img src="https://source.unsplash.com/400x300/?coffee">
+</div>
+
+<!-- CARD 3 -->
+<div class="stackly-review-card">
+<div>
+<div class="stackly-review-name">Subham A, 25</div>
+<div class="stackly-review-text">
+It has become a routine to order Chai and Bun Mask from Stackly. Fast and yum!
+</div>
+</div>
+<img src="https://source.unsplash.com/400x300/?tea,burger">
+</div>
+
+<!-- CARD 4 -->
+<div class="stackly-review-card">
+<div>
+<div class="stackly-review-name">Bhavini S, 24</div>
+<div class="stackly-review-text">
+Tried the Vietnamese cold coffee from Stackly Cafe – legit 10/10!
+</div>
+</div>
+<img src="https://source.unsplash.com/400x300/?iced-coffee">
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Subscribe Section</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f6f9;
+padding:40px 20px;
+}
+
+/* SECTION */
+.stackly-subscribe-section{
+background:#2563eb; /* Blue */
+color:#fff;
+padding:40px 60px;
+border-radius:6px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+/* TEXT */
+.stackly-subscribe-text h2{
+font-size:28px;
+font-weight:600;
+margin-bottom:8px;
+}
+
+.stackly-subscribe-text p{
+font-size:15px;
+opacity:0.9;
+}
+
+/* BUTTON */
+.stackly-subscribe-btn{
+background:#fff;
+color:#2563eb;
+padding:14px 40px;
+border:2px solid #fff;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.stackly-subscribe-btn:hover{
+background:transparent;
+color:#fff;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+.stackly-subscribe-section{
+flex-direction:column;
+text-align:center;
+gap:20px;
+padding:30px 20px;
+}
+
+.stackly-subscribe-text h2{
+font-size:20px;
+}
+
+.stackly-subscribe-btn{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stackly-subscribe-section">
+
+<div class="stackly-subscribe-text">
+<h2>Direct to your inbox</h2>
+<p>Stay up to date with Stackly's latest offers and exclusive deals.</p>
+</div>
+
+<button class="stackly-subscribe-btn">
+Subscribe
+</button>
+
+</div>
+
+</body>
+</html>
