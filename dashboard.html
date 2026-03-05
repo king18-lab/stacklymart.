@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Mart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:2000px;
+background:#f5f5f5;
+}
+
+/* ================= NAVBAR ================= */
+
+.header{
+width:100%;
+height:80px;
+background:rgb(65,65,85);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 60px;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
+
+.logo img{
+width:185px;
+}
+
+.nav-menu{
+display:flex;
+gap:18px;
+align-items:center;
+}
+
+.nav-item{
+position:relative;
+}
+
+.nav-item>a{
+text-decoration:none;
+color:#cfd1cc;
+padding:10px 22px;
+border-radius:30px;
+border:1px solid #cfcfcf;
+font-size:15px;
+transition:.3s;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.nav-item>a:hover{
+background:#fff;
+color:#000;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+margin-top:8px;
+left:0;
+background:#fff;
+width:220px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+padding:10px 0;
+opacity:0;
+visibility:hidden;
+transform:translateY(10px);
+transition:.3s;
+}
+
+.nav-item.active .dropdown{
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+}
+
+.dropdown a{
+display:block;
+padding:12px 18px;
+text-decoration:none;
+color:#222;
+font-size:14px;
+}
+
+.dropdown a:hover{
+background:#f3f3f3;
+}
+
+/* LOGIN BUTTON */
+
+.call-btn{
+background:#ff3b0a;
+color:#fff;
+padding:14px 26px;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+}
+
+/* HAMBURGER */
+
+.hamburger{
+width:32px;
+display:none;
+flex-direction:column;
+cursor:pointer;
+}
+
+.hamburger span{
+height:3px;
+background:#cccaca;
+margin:5px 0;
+border-radius:3px;
+}
+
+/* MOBILE DRAWER */
+
+.mobile-drawer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#fff;
+padding:30px 25px;
+transform:translateX(-100%);
+transition:.45s;
+z-index:2000;
+overflow-y:auto;
+}
+
+.mobile-drawer.active{
+transform:translateX(0);
+}
+
+.drawer-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.mobile-drawer a{
+font-size:20px;
+padding:16px 0;
+text-decoration:none;
+color:#111;
+border-bottom:1px solid #eee;
+display:block;
+}
+
+/* MOBILE DROPDOWN */
+
+.mobile-parent{
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+padding:16px 0;
+border-bottom:1px solid #eee;
+}
+
+.mobile-submenu{
+display:none;
+padding-left:15px;
+}
+
+.mobile-submenu a{
+font-size:17px;
+color:#555;
+border:none;
+padding:10px 0;
+}
+
+.mobile-parent.active i{
+transform:rotate(180deg);
+}
+
+.drawer-btn{
+margin-top:20px;
+background:#ff3b0a;
+color:#fff;
+padding:16px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+.nav-menu,
+.call-btn{
+display:none;
+}
+
+.hamburger{
+display:flex;
+}
+
+.header{
+padding:0 12px;
+}
+
+.logo img{
+width:150px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="header">
+
+<div class="logo">
+<img src="stacklylogo (1).webp" alt="logo">
+</div>
+
+<nav class="nav-menu">
+
+<div class="nav-item" id="homeDropdown">
+<a href="index.html">Home <i class="fa-solid fa-chevron-down"></i></a>
+
+<div class="dropdown">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+
+</div>
+
+<div class="nav-item"><a href="dashboard.html">Dashboard</a></div>
+<div class="nav-item"><a href="beauty.html">Beauty</a></div>
+<div class="nav-item"><a href="jewelary.html">Jewellery</a></div>
+<div class="nav-item"><a href="contact.html">Contact</a></div>
+
+</nav>
+
+<a href="login.html" class="call-btn">Login</a>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-drawer" id="mobileDrawer">
+
+<div class="drawer-header">
+<h3>STACKLY MART</h3>
+<span id="closeMenu">✕</span>
+</div>
+
+<div class="mobile-parent" id="mobileHome">
+<span>Home</span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="mobile-submenu" id="mobileSub">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+
+<a href="dashboard.html">Dashboard</a> <a href="beauty.html">Beauty</a>  <a href="jewelary.html">Jewellery</a> <a href="contact.html">Contact</a>
+
+<a href="log1.html">
+   <button class="drawer-btn">Login</button>
+</a>
+</div>
+
+<script>
+
+/* HAMBURGER */
+
+const hamburger=document.getElementById("hamburger");
+const drawer=document.getElementById("mobileDrawer");
+const closeMenu=document.getElementById("closeMenu");
+
+hamburger.onclick=()=>{drawer.classList.toggle("active");}
+closeMenu.onclick=()=>{drawer.classList.remove("active");}
+
+/* MOBILE DROPDOWN */
+
+const mobileHome=document.getElementById("mobileHome");
+const mobileSub=document.getElementById("mobileSub");
+
+mobileHome.onclick=()=>{
+mobileHome.classList.toggle("active");
+mobileSub.style.display=mobileSub.style.display==="block"?"none":"block";
+};
+
+/* DESKTOP DROPDOWN */
+
+const navItems=document.querySelectorAll(".nav-item");
+
+navItems.forEach(item=>{
+const link=item.querySelector("a");
+
+if(item.querySelector(".dropdown")){
+link.addEventListener("click",(e)=>{
+e.preventDefault();
+navItems.forEach(i=>{if(i!==item){i.classList.remove("active");}});
+item.classList.toggle("active");
+});
+}
+});
+
+/* CLICK OUTSIDE CLOSE */
+
+document.addEventListener("click",(e)=>{
+if(!e.target.closest(".nav-item")){
+navItems.forEach(i=>i.classList.remove("active"));
+}
+});
+
+</script>
+
+</body>
+</html>
+
+
+<title>Stackly Grocery Analytics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+}
+
+/* SECTION */
+
+.stacklySection{
+padding:80px 5%;
+max-width:1200px;
+margin:auto;
+margin-top: 80px;
+}
+
+/* TITLE */
+
+.stacklyTitle{
+font-size:32px;
+margin-bottom:40px;
+text-align:center;
+color:#1a2a4f;
+}
+
+/* FLOW CHART */
+
+#stacklyFlowGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
+}
+
+.stacklyFlowCard{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.stacklyFlowCard span{
+font-size:40px;
+display:block;
+margin-bottom:10px;
+}
+
+.stacklyFlowCard h3{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.stacklyFlowCard p{
+font-size:14px;
+opacity:0.8;
+}
+
+/* DATA CARDS */
+
+#stacklyDataCards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:40px;
+}
+
+.stacklyDataCard{
+background:white;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.stacklyDataValue{
+font-size:28px;
+font-weight:700;
+color:#0a8f5b;
+margin-top:10px;
+}
+
+/* CHART GRID */
+
+#stacklyChartGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.stacklyChartCard{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* METRICS */
+
+#stacklyGrowthGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.stacklyGrowthCard{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.stacklyGrowthCard h3{
+margin-bottom:10px;
+}
+
+.stacklyGrowthCard p{
+font-size:14px;
+opacity:0.8;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.stacklyTitle{
+font-size:26px;
+margin-top: 50px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PAGE 1 FLOW -->
+
+<section class="stacklySection">
+
+<h2 class="stacklyTitle">How Stackly Grocery Works</h2>
+
+<div id="stacklyFlowGrid">
+
+<div class="stacklyFlowCard">
+<span>🛒</span>
+<h3>Customer Orders</h3>
+<p>Customers browse and place orders through Stackly Mart.</p>
+</div>
+
+<div class="stacklyFlowCard">
+<span>📦</span>
+<h3>Warehouse Packing</h3>
+<p>Orders are picked and packed from the nearest warehouse.</p>
+</div>
+
+<div class="stacklyFlowCard">
+<span>🚴</span>
+<h3>Fast Delivery</h3>
+<p>Delivery partners deliver groceries within 10 minutes.</p>
+</div>
+
+<div class="stacklyFlowCard">
+<span>⭐</span>
+<h3>Customer Satisfaction</h3>
+<p>Fresh groceries delivered with high customer satisfaction.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- PAGE 2 DATA -->
+
+<section class="stacklySection">
+
+<h2 class="stacklyTitle">Stackly Grocery Data Analytics</h2>
+
+<div id="stacklyDataCards">
+
+<div class="stacklyDataCard">
+<h4>Total Orders</h4>
+<div class="stacklyDataValue">15,200</div>
+</div>
+
+<div class="stacklyDataCard">
+<h4>Daily Deliveries</h4>
+<div class="stacklyDataValue">3,800</div>
+</div>
+
+<div class="stacklyDataCard">
+<h4>Active Customers</h4>
+<div class="stacklyDataValue">9,500</div>
+</div>
+
+<div class="stacklyDataCard">
+<h4>Revenue</h4>
+<div class="stacklyDataValue">₹12.4L</div>
+</div>
+
+</div>
+
+<div id="stacklyChartGrid">
+
+<div class="stacklyChartCard">
+<canvas id="stacklySalesChart"></canvas>
+</div>
+
+<div class="stacklyChartCard">
+<canvas id="stacklyOrdersChart"></canvas>
+</div>
+
+<div class="stacklyChartCard">
+<canvas id="stacklyCategoryChart"></canvas>
+</div>
+
+</div>
+
+</section>
+
+<!-- PAGE 3 GROWTH -->
+
+<section class="stacklySection">
+
+<h2 class="stacklyTitle">Stackly Growth Metrics</h2>
+
+<div id="stacklyGrowthGrid">
+
+<div class="stacklyGrowthCard">
+<h3>Fast Delivery Network</h3>
+<p>Stackly operates multiple micro-warehouses enabling ultra-fast 10-minute grocery delivery.</p>
+</div>
+
+<div class="stacklyGrowthCard">
+<h3>Expanding Cities</h3>
+<p>Stackly Mart is expanding rapidly to new cities and serving thousands of households daily.</p>
+</div>
+
+<div class="stacklyGrowthCard">
+<h3>Customer Retention</h3>
+<p>More than 78% of Stackly customers reorder within the same week.</p>
+</div>
+
+<div class="stacklyGrowthCard">
+<h3>Product Variety</h3>
+<p>Over 6,000 grocery products including fruits, vegetables, dairy, snacks and essentials.</p>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* CHARTS */
+
+new Chart(document.getElementById("stacklySalesChart"),{
+type:"line",
+data:{
+labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+datasets:[{
+label:"Sales ₹",
+data:[1200,1500,2000,1800,2600,3000,3200],
+borderColor:"#0a8f5b",
+backgroundColor:"rgba(10,143,91,0.2)",
+fill:true,
+tension:0.4
+}]
+}
+});
+
+new Chart(document.getElementById("stacklyOrdersChart"),{
+type:"bar",
+data:{
+labels:["Week1","Week2","Week3","Week4"],
+datasets:[{
+label:"Orders",
+data:[400,520,610,730],
+backgroundColor:"#1a2a4f"
+}]
+}
+});
+
+new Chart(document.getElementById("stacklyCategoryChart"),{
+type:"doughnut",
+data:{
+labels:["Fruits","Vegetables","Dairy","Snacks"],
+datasets:[{
+data:[35,30,20,15],
+backgroundColor:["#ff6384","#4bc0c0","#ffcd56","#36a2eb"]
+}]
+}
+});
+
+/* SCROLL REVEAL */
+
+ScrollReveal().reveal('.stacklyFlowCard',{
+distance:'60px',
+duration:1200,
+interval:200,
+origin:'bottom'
+});
+
+ScrollReveal().reveal('.stacklyDataCard',{
+distance:'60px',
+duration:1200,
+interval:200,
+origin:'bottom'
+});
+
+ScrollReveal().reveal('.stacklyChartCard',{
+distance:'60px',
+duration:1200,
+interval:200,
+origin:'bottom'
+});
+
+ScrollReveal().reveal('.stacklyGrowthCard',{
+distance:'60px',
+duration:1200,
+interval:200,
+origin:'bottom'
+});
+
+</script>
+<style>
+
+/* ===== SECTION BASE ===== */
+#stkds-section{
+max-width:1200px;
+margin:80px auto;
+padding:20px;
+font-family:'Poppins',sans-serif;
+background:#eef2f7;
+border-radius:16px;
+}
+
+/* TITLE */
+#stkds-title{
+font-size:30px;
+font-weight:700;
+margin-bottom:25px;
+color:#0b3c91;
+}
+
+/* KPI CARDS */
+.stkds-kpi{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:28px;
+}
+
+.stkds-card{
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,.07);
+transition:.3s;
+}
+
+.stkds-card:hover{transform:translateY(-6px);}
+
+.stkds-card h4{
+font-size:13px;
+color:#777;
+margin-bottom:6px;
+}
+
+.stkds-number{
+font-size:26px;
+font-weight:700;
+color:#0b3c91;
+}
+
+/* CHART GRID */
+.stkds-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px;
+margin-bottom:28px;
+}
+
+.stkds-panel{
+background:#fff;
+padding:18px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,.07);
+}
+
+/* CHART FIX */
+canvas{
+width:100% !important;
+height:280px !important;
+}
+
+/* FLOW */
+#stkds-flow{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:15px;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.stkds-box{
+flex:1;
+min-width:120px;
+padding:16px;
+text-align:center;
+border-radius:10px;
+color:#fff;
+font-weight:600;
+}
+
+.visitors{background:#0b63ff;}
+.leads{background:#00a88f;}
+.customers{background:#ff6a00;}
+
+/* SCROLL REVEAL */
+.stkds-reveal{
+opacity:0;
+transform:translateY(40px);
+transition:.7s;
+}
+.stkds-reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+.stkds-kpi{
+grid-template-columns:1fr 1fr;
+}
+
+.stkds-grid{
+grid-template-columns:1fr;
+}
+
+canvas{height:230px !important;}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="stkds-section">
+
+<div id="stkds-title">Stackly Mart Analytics</div>
+
+<!-- KPI -->
+
+<div class="stkds-kpi stkds-reveal">
+
+<div class="stkds-card">
+<h4>Visitors</h4>
+<div class="stkds-number" data-val="25480">0</div>
+</div>
+
+<div class="stkds-card">
+<h4>Leads</h4>
+<div class="stkds-number" data-val="6820">0</div>
+</div>
+
+<div class="stkds-card">
+<h4>Conversions</h4>
+<div class="stkds-number" data-val="2140">0</div>
+</div>
+
+<div class="stkds-card">
+<h4>Revenue ₹</h4>
+<div class="stkds-number" data-val="1250000">0</div>
+</div>
+
+</div>
+
+<!-- CHARTS -->
+
+<div class="stkds-grid stkds-reveal">
+
+<div class="stkds-panel">
+<h3>Website Traffic</h3>
+<canvas id="stkds-traffic"></canvas>
+</div>
+
+<div class="stkds-panel">
+<h3>Traffic Sources</h3>
+<canvas id="stkds-source"></canvas>
+</div>
+
+</div>
+
+<div class="stkds-panel stkds-reveal">
+<h3>Campaign Performance</h3>
+<canvas id="stkds-campaign"></canvas>
+</div>
+
+<!-- FLOW -->
+
+<div class="stkds-panel stkds-reveal">
+<h3>Marketing Funnel</h3>
+<div id="stkds-flow">
+<div class="stkds-box visitors">Visitors</div>
+➡
+<div class="stkds-box leads">Leads</div>
+➡
+<div class="stkds-box customers">Customers</div>
+</div>
+</div>
+
+</section>
+
+<script>
+
+/* COUNTER */
+document.querySelectorAll('.stkds-number').forEach(el=>{
+let target=+el.dataset.val;
+let count=0;
+let inc=target/150;
+
+function update(){
+count+=inc;
+if(count<target){
+el.textContent=Math.floor(count);
+requestAnimationFrame(update);
+}else{
+el.textContent=target.toLocaleString();
+}}
+update();
+});
+
+/* CHARTS */
+new Chart(document.getElementById('stkds-traffic'),{
+type:'line',
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul"],
+datasets:[{
+data:[3000,4200,5100,6200,7200,8600,9800],
+borderColor:"#0b63ff",
+backgroundColor:"rgba(11,99,255,.2)",
+fill:true,
+tension:.4
+}]
+}});
+
+new Chart(document.getElementById('stkds-campaign'),{
+type:'bar',
+data:{
+labels:["SEO","Google Ads","Facebook","Instagram","Email"],
+datasets:[{
+data:[420,610,540,480,300],
+backgroundColor:["#0b63ff","#00a88f","#ff6a00","#6a0dad","#e63946"]
+}]
+}});
+
+new Chart(document.getElementById('stkds-source'),{
+type:'doughnut',
+data:{
+labels:["Organic","Ads","Social","Referral"],
+datasets:[{
+data:[45,30,15,10],
+backgroundColor:["#0b63ff","#00a88f","#ff6a00","#6a0dad"]
+}]
+}});
+
+/* SCROLL REVEAL */
+function reveal(){
+document.querySelectorAll('.stkds-reveal').forEach(el=>{
+if(el.getBoundingClientRect().top < window.innerHeight-80){
+el.classList.add('active');
+}
+});
+}
+window.addEventListener('scroll',reveal);
+window.addEventListener('load',reveal);
+
+</script>
+
+</body>
+</html>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#dcdcdf;
+color:black;
+}
+
+/* HERO SECTION */
+.hero{
+height:520px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(135deg,#0ea5e9,#1e3a8a);
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+width:600px;
+height:600px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+top:-200px;
+left:-150px;
+filter:blur(60px);
+}
+
+.hero h1{
+font-size:48px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+.hero p{
+max-width:600px;
+opacity:.9;
+line-height:1.6;
+}
+
+/* DASHBOARD (OVERLAP) */
+.dashboard-wrapper{
+position:relative;
+margin-top:-170px; /* THIS CREATES OVERLAP */
+padding:0 20px 60px;
+}
+
+.dashboard{
+max-width:1100px;
+margin:auto;
+padding:25px;
+border-radius:20px;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px);
+box-shadow:0 25px 80px rgba(0,0,0,.6);
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.07);
+padding:20px;
+border-radius:16px;
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(14,165,233,.45);
+}
+
+.title{
+opacity:.75;
+font-size:14px;
+}
+
+.number{
+font-size:28px;
+font-weight:700;
+margin-top:10px;
+color:#38bdf8;
+}
+
+/* PROGRESS */
+.progress{
+height:6px;
+background:rgba(255,255,255,.1);
+margin-top:15px;
+border-radius:10px;
+overflow:hidden;
+}
+.progress span{
+display:block;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#22d3ee,#3b82f6);
+animation:load 2s forwards;
+}
+
+/* CHART */
+.chart{
+margin-top:30px;
+height:220px;
+display:flex;
+align-items:flex-end;
+gap:12px;
+}
+
+.bar{
+flex:1;
+background:linear-gradient(to top,#22d3ee,#3b82f6);
+border-radius:6px 6px 0 0;
+height:0;
+animation:grow 1.6s forwards;
+}
+
+/* ANIMATION */
+@keyframes load{to{width:100%;}}
+@keyframes grow{to{height:var(--h);}}
+
+/* MOBILE */
+@media(max-width:900px){
+.hero h1{font-size:32px;}
+.dashboard-wrapper{margin-top:-120px;}
+.grid{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:500px){
+.hero{height:460px;padding:0 20px;}
+.hero h1{font-size:26px;}
+.grid{grid-template-columns:1fr;}
+.dashboard-wrapper{margin-top:-90px;}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+<h1>Grow Your Business Online</h1>
+<p>Stackly Mart makes grocery shopping simple and convenient. Shop fresh fruits, vegetables, dairy products and daily essentials with fast delivery, great prices and trusted quality.</p>
+</section>
+
+<!-- OVERLAPPING DASHBOARD -->
+
+<section class="dashboard-wrapper">
+<div class="dashboard">
+
+<div class="grid">
+<div class="card">
+<div class="title">Visitors</div>
+<div class="number" data-target="15240">0</div>
+<div class="progress"><span></span></div>
+</div>
+
+<div class="card">
+<div class="title">Leads</div>
+<div class="number" data-target="3980">0</div>
+<div class="progress"><span></span></div>
+</div>
+
+<div class="card">
+<div class="title">Conversions</div>
+<div class="number" data-target="1280">0</div>
+<div class="progress"><span></span></div>
+</div>
+
+<div class="card">
+<div class="title">Revenue (₹)</div>
+<div class="number" data-target="325000">0</div>
+<div class="progress"><span></span></div>
+</div>
+</div>
+
+<div class="chart">
+<div class="bar" style="--h:80%"></div>
+<div class="bar" style="--h:60%"></div>
+<div class="bar" style="--h:95%"></div>
+<div class="bar" style="--h:70%"></div>
+<div class="bar" style="--h:85%"></div>
+<div class="bar" style="--h:55%"></div>
+<div class="bar" style="--h:90%"></div>
+</div>
+
+</div>
+</section>
+
+<script>
+const counters=document.querySelectorAll('.number');
+
+counters.forEach(counter=>{
+const update=()=>{
+const target=+counter.getAttribute('data-target');
+const current=+counter.innerText;
+const inc=target/120;
+
+if(current<target){
+counter.innerText=Math.ceil(current+inc);
+setTimeout(update,20);
+}else{
+counter.innerText=target.toLocaleString();
+}
+};
+update();
+});
+</script>
+
+</body>
+</html>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== UNIQUE STACKLY APP SECTION ===== */
+
+#stkapp-section{
+background:linear-gradient(120deg,#bfbfd6,#cacccf);
+padding:80px 6%;
+color:#fff;
+font-family:'Poppins',sans-serif;
+}
+
+/* layout */
+#stkapp-container{
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:70px;
+flex-wrap:wrap;
+}
+
+/* QR AREA */
+#stkapp-qrbox{
+text-align:center;
+}
+
+#stkapp-title{
+font-size:18px;
+margin-bottom:18px;
+letter-spacing:.5px;
+}
+
+#stkapp-qrbox img{
+width:160px;
+height:160px;
+background:#fff;
+padding:14px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.5);
+}
+
+/* STORE BUTTONS AREA */
+#stkapp-buttons{
+display:flex;
+gap:26px;
+flex-wrap:wrap;
+}
+
+/* BUTTON */
+.stkapp-btn{
+display:flex;
+align-items:center;
+gap:14px;
+background:#000;
+padding:16px 26px;
+border-radius:16px;
+text-decoration:none;
+color:#fff;
+transition:.25s;
+min-width:240px;
+}
+
+.stkapp-btn:hover{
+transform:translateY(-5px);
+background:#0d0d0d;
+box-shadow:0 12px 35px rgba(0,0,0,.6);
+}
+
+/* icon */
+.stkapp-icon{
+font-size:30px;
+}
+
+/* text */
+.stkapp-text small{
+display:block;
+font-size:12px;
+opacity:.7;
+letter-spacing:.5px;
+}
+
+.stkapp-text span{
+font-size:18px;
+font-weight:600;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+#stkapp-container{
+flex-direction:column;
+gap:45px;
+text-align:center;
+}
+
+#stkapp-buttons{
+justify-content:center;
+}
+
+.stkapp-btn{
+width:240px;
+justify-content:center;
+}
+
+}
+
+</style>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* SECTION */
+
+#stacklyDownloadSection{
+position:relative;
+padding:80px 5%;
+background:url("apple.webp") center/cover no-repeat;
+color:#fff;
+}
+
+/* DARK OVERLAY */
+
+#stacklyDownloadSection::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(5,20,45,0.85);
+z-index:1;
+}
+
+/* CONTAINER */
+
+#stacklyDownloadContainer{
+position:relative;
+z-index:2;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:40px;
+flex-wrap:wrap;
+}
+
+/* TEXT */
+
+#stacklyDownloadText{
+flex:1;
+min-width:280px;
+}
+
+#stacklyDownloadText h2{
+font-size:34px;
+margin-bottom:15px;
+}
+
+#stacklyDownloadText p{
+font-size:15px;
+line-height:1.6;
+opacity:0.9;
+margin-bottom:18px;
+}
+
+/* QR */
+
+#stacklyDownloadQR{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+}
+
+#stacklyDownloadQR span{
+font-size:14px;
+}
+
+#stacklyDownloadQR img{
+width:110px;
+background:#fff;
+padding:8px;
+border-radius:10px;
+}
+
+/* BUTTONS */
+
+#stacklyDownloadButtons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.stacklyStoreBtn{
+background:#000;
+color:#fff;
+padding:14px 25px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+.stacklyStoreBtn:hover{
+background:#111;
+transform:translateY(-4px);
+}
+
+.stacklyStoreBtn span{
+font-size:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyDownloadContainer{
+flex-direction:column;
+text-align:center;
+}
+
+#stacklyDownloadButtons{
+justify-content:center;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="stacklyDownloadSection">
+
+<div id="stacklyDownloadContainer">
+
+<!-- TEXT -->
+
+<div id="stacklyDownloadText">
+
+<h2>Get 10-Minute Delivery with Stackly Mart</h2>
+
+<p>
+Experience ultra-fast grocery delivery with Stackly Mart. 
+Order fresh vegetables, fruits, dairy products, snacks and everyday essentials 
+and receive them at your doorstep in just <strong>10 minutes</strong>.
+</p>
+
+<p>
+Download the Stackly mobile app to enjoy exclusive offers, quick checkout, 
+live order tracking and a seamless shopping experience anytime.
+</p>
+
+</div>
+
+<!-- QR -->
+
+<div id="stacklyDownloadQR">
+
+<span>Scan to Download</span>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=stacklymart">
+
+</div>
+
+<!-- BUTTONS -->
+
+<div id="stacklyDownloadButtons">
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span></span>
+Download on App Store
+</a>
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span>▶</span>
+Get it on Google Play
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+</body>
+</html>
+<footer class="stackly-footer">
+
+<div class="footer-container">
+
+    <!-- LEFT ABOUT -->
+    <div class="footer-about">
+        <img src="stacklylogo (1).webp" class="footer-logo">
+
+        <p>
+        Stackly Digital is a creative digital marketing agency helping
+        brands grow online with powerful strategies, branding, and
+        performance marketing solutio<!DOCTYPE html>
+
+
+
+        <div class="footer-social">
+            <a href="4041.html"><i class="fa-brands fa-instagram"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="home.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="beauty.html">Beauty</a>
+        <a href="jewelary.html">Jewellary</a>
+        <a href="contact.html">Contact</a>
+        
+    </div>
+
+    <!-- SERVICES -->
+    <div class="footer-links">
+        <h4>Services</h4>
+        <a href="4041.html">Sell on Stackly</a>
+        <a href="4041.html">Delivery on Stackly</a>
+        <a href="4041.html">Social Media </a>
+        <a href="4041.html">Google Ads</a>
+        <a href="4041.html">Press</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-contact">
+        <h4>Contact Us</h4>
+
+        <p><i class="fa-solid fa-location-dot"></i> Bangalore, India</p>
+        <p><i class="fa-solid fa-phone"></i> +91 90352 78124</p>
+        <p><i class="fa-solid fa-envelope"></i> hello@stacklymart.com</p>
+
+        <a href="4041.html" class="footer-btn">Custmor Care</a>
+    </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="footer-bottom">
+    <p>© 2026 Stackly Mart. All Rights Reserved.</p>
+
+    <div class="footer-policy">
+        <a href="4041.html">Privacy Policy</a>
+        <a href="4041.html">Terms & Conditions</a>
+    </div>
+</div>
+
+</footer>
+<style>
+
+/* ================= FOOTER ================= */
+.stackly-footer{
+    background:#0f0f0f;
+    color:#ccc;
+    margin-top:120px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 20px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.3fr;
+    gap:50px;
+}
+
+/* LOGO + ABOUT */
+.footer-logo{
+    width:170px;
+    margin-bottom:18px;
+}
+
+.footer-about p{
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:22px;
+    color:#aaa;
+}
+
+/* SOCIAL ICONS */
+.footer-social a{
+    width:36px;
+    height:36px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#1b1b1b;
+    color:#fff;
+    border-radius:50%;
+    margin-right:8px;
+    transition:.3s;
+}
+
+.footer-social a:hover{
+    background:#18c97a;
+    transform:translateY(-3px);
+}
+
+/* LINKS */
+.footer-links h4,
+.footer-contact h4{
+    color:#fff;
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+.footer-links a{
+    display:block;
+    color:#bbb;
+    text-decoration:none;
+    margin-bottom:12px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:#18c97a;
+    padding-left:6px;
+}
+
+/* CONTACT */
+.footer-contact p{
+    font-size:14px;
+    margin-bottom:12px;
+    color:#bbb;
+}
+
+.footer-contact i{
+    color:#18c97a;
+    margin-right:8px;
+}
+
+.footer-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#18c97a;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-btn:hover{
+    background:#0f9d58;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    border-top:1px solid #222;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1200px;
+    margin:auto;
+    font-size:13px;
+    color:#888;
+}
+
+.footer-policy a{
+    color:#888;
+    margin-left:18px;
+    text-decoration:none;
+}
+
+.footer-policy a:hover{
+    color:#18c97a;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+    }
+}
+
+@media(max-width:600px){
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .footer-social a{
+        margin-bottom:8px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+}
+@media(max-width:600px){
+
+    /* stack columns */
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:left;
+    }
+
+    /* about section */
+    .footer-about{
+        text-align:left;
+    }
+
+    .footer-about p{
+        text-align:left;
+    }
+
+    /* social icons left */
+    .footer-social{
+        justify-content:flex-start;
+    }
+
+    /* links left */
+    .footer-links{
+        text-align:left;
+    }
+
+    .footer-links a{
+        text-align:left;
+    }
+
+    /* contact section */
+    .footer-contact{
+        text-align:left;
+    }
+
+    .footer-contact p{
+        text-align:left;
+    }
+
+    /* bottom bar */
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+        gap:10px;
+    }
+
+    .footer-policy{
+        display:flex;
+        gap:14px;
+    }
+
+    .footer-policy a{
+        margin-left:0;
+    }
+}
+</style>

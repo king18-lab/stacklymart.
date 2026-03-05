@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Mart Loader</title>
+
+<style>
+
+/* PAGE RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* LOADER SCREEN */
+
+#stacklyLoaderScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#0f172a;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+}
+
+/* LOGO TEXT */
+
+#stacklyLoaderLogo{
+font-size:42px;
+font-weight:700;
+color:#22c55e;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+/* SPINNER */
+
+#stacklyLoaderSpinner{
+width:50px;
+height:50px;
+border:4px solid rgba(255,255,255,0.2);
+border-top:4px solid #22c55e;
+border-radius:50%;
+animation:stacklySpin 1s linear infinite;
+}
+
+/* ANIMATION */
+
+@keyframes stacklySpin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+/* MAIN CONTENT (hidden until load) */
+
+#stacklyMainContent{
+display:none;
+padding:40px;
+text-align:center;
+font-size:22px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div id="stacklyLoaderScreen">
+
+<div id="stacklyLoaderLogo">STACKLY MART</div>
+
+<div id="stacklyLoaderSpinner"></div>
+
+</div>
+
+<!-- WEBSITE CONTENT -->
+
+<div id="stacklyMainContent">
+
+Welcome to Stackly Mart 🚀
+
+</div>
+
+<script>
+
+/* LOADER TIME 3 SECONDS */
+
+setTimeout(function(){
+
+document.getElementById("stacklyLoaderScreen").style.display="none";
+document.getElementById("stacklyMainContent").style.display="block";
+
+},3000);
+
+</script>
+
+</body>
+</html>

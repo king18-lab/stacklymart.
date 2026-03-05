@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Mart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:2000px;
+background:#f5f5f5;
+}
+
+/* ================= LOADER ================= */
+
+#stacklyLoaderScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#0f172a;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+}
+
+#stacklyLoaderLogo{
+font-size:38px;
+font-weight:700;
+color:#22c55e;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.stacklySpinner{
+width:50px;
+height:50px;
+border:4px solid rgba(255,255,255,0.2);
+border-top:4px solid #22c55e;
+border-radius:50%;
+animation:stacklySpin 1s linear infinite;
+}
+
+@keyframes stacklySpin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+/* ================= NAVBAR ================= */
+
+.header{
+width:100%;
+height:80px;
+background:rgb(65,65,85);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 60px;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
+
+.logo img{
+width:185px;
+}
+
+.nav-menu{
+display:flex;
+gap:18px;
+align-items:center;
+}
+
+.nav-item{
+position:relative;
+}
+
+.nav-item>a{
+text-decoration:none;
+color:#cfd1cc;
+padding:10px 22px;
+border-radius:30px;
+border:1px solid #cfcfcf;
+font-size:15px;
+transition:.3s;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.nav-item>a:hover{
+background:#fff;
+color:#000;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+margin-top:8px;
+left:0;
+background:#fff;
+width:220px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+padding:10px 0;
+opacity:0;
+visibility:hidden;
+transform:translateY(10px);
+transition:.3s;
+}
+
+.nav-item.active .dropdown{
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+}
+
+.dropdown a{
+display:block;
+padding:12px 18px;
+text-decoration:none;
+color:#222;
+font-size:14px;
+}
+
+.dropdown a:hover{
+background:#f3f3f3;
+}
+
+/* LOGIN BUTTON */
+
+.call-btn{
+background:#ff3b0a;
+color:#fff;
+padding:14px 26px;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+}
+
+/* HAMBURGER */
+
+.hamburger{
+width:32px;
+display:none;
+flex-direction:column;
+cursor:pointer;
+}
+
+.hamburger span{
+height:3px;
+background:#cccaca;
+margin:5px 0;
+border-radius:3px;
+}
+
+/* MOBILE DRAWER */
+
+.mobile-drawer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#fff;
+padding:30px 25px;
+transform:translateX(-100%);
+transition:.45s;
+z-index:2000;
+overflow-y:auto;
+}
+
+.mobile-drawer.active{
+transform:translateX(0);
+}
+
+.drawer-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.mobile-drawer a{
+font-size:20px;
+padding:16px 0;
+text-decoration:none;
+color:#111;
+border-bottom:1px solid #eee;
+display:block;
+}
+
+/* MOBILE DROPDOWN */
+
+.mobile-parent{
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+padding:16px 0;
+border-bottom:1px solid #eee;
+}
+
+.mobile-submenu{
+display:none;
+padding-left:15px;
+}
+
+.mobile-submenu a{
+font-size:17px;
+color:#555;
+border:none;
+padding:10px 0;
+}
+
+.mobile-parent.active i{
+transform:rotate(180deg);
+}
+
+.drawer-btn{
+margin-top:20px;
+background:#ff3b0a;
+color:#fff;
+padding:16px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+.nav-menu,
+.call-btn{
+display:none;
+}
+
+.hamburger{
+display:flex;
+}
+
+.header{
+padding:0 12px;
+}
+
+.logo img{
+width:150px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOADER -->
+
+<div id="stacklyLoaderScreen">
+<div id="stacklyLoaderLogo">STACKLY MART</div>
+<div class="stacklySpinner"></div>
+</div>
+
+<!-- NAVBAR -->
+
+<header class="header">
+
+<div class="logo">
+<img src="stacklylogo (1).webp" alt="logo">
+</div>
+
+<nav class="nav-menu">
+
+<div class="nav-item" id="homeDropdown">
+<a href="index.html">Home <i class="fa-solid fa-chevron-down"></i></a>
+
+<div class="dropdown">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+</div>
+
+<div class="nav-item"><a href="dashboard.html">Dashboard</a></div>
+<div class="nav-item"><a href="beauty.html">Beauty</a></div>
+<div class="nav-item"><a href="jewelary.html">Jewellery</a></div>
+<div class="nav-item"><a href="contact.html">Contact</a></div>
+
+</nav>
+
+<a href="login.html" class="call-btn">Login</a>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-drawer" id="mobileDrawer">
+
+<div class="drawer-header">
+<h3>STACKLY MART</h3>
+<span id="closeMenu">✕</span>
+</div>
+
+<div class="mobile-parent" id="mobileHome">
+<span>Home</span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="mobile-submenu" id="mobileSub">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+
+<a href="dashboard.html">Dashboard</a> <a href="beauty.html">Beauty</a>  <a href="jewelary.html">Jewellery</a> <a href="contact.html">Contact</a>
+
+<a href="log1.html">
+   <button class="drawer-btn">Login</button>
+</a>
+
+</div>
+
+<script>
+
+/* LOADER 3 SECONDS */
+
+window.addEventListener("load",function(){
+
+setTimeout(function(){
+document.getElementById("stacklyLoaderScreen").style.display="none";
+},3000);
+
+});
+
+/* HAMBURGER */
+
+const hamburger=document.getElementById("hamburger");
+const drawer=document.getElementById("mobileDrawer");
+const closeMenu=document.getElementById("closeMenu");
+
+hamburger.onclick=()=>{drawer.classList.toggle("active");}
+closeMenu.onclick=()=>{drawer.classList.remove("active");}
+
+/* MOBILE DROPDOWN */
+
+const mobileHome=document.getElementById("mobileHome");
+const mobileSub=document.getElementById("mobileSub");
+
+mobileHome.onclick=()=>{
+mobileHome.classList.toggle("active");
+mobileSub.style.display=mobileSub.style.display==="block"?"none":"block";
+};
+
+/* DESKTOP DROPDOWN */
+
+const navItems=document.querySelectorAll(".nav-item");
+
+navItems.forEach(item=>{
+const link=item.querySelector("a");
+
+if(item.querySelector(".dropdown")){
+link.addEventListener("click",(e)=>{
+e.preventDefault();
+navItems.forEach(i=>{if(i!==item){i.classList.remove("active");}});
+item.classList.toggle("active");
+});
+}
+});
+
+/* CLICK OUTSIDE CLOSE */
+
+document.addEventListener("click",(e)=>{
+if(!e.target.closest(".nav-item")){
+navItems.forEach(i=>i.classList.remove("active"));
+}
+});
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
+
+<style>
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+/* HERO */
+
+#stacklyHeroMain{
+position:relative;
+width:100%;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+margin-top: 100px;
+}
+
+/* VIDEO */
+
+#stacklyHeroVideoBg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+/* OVERLAY */
+
+#stacklyHeroOverlayBg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+/* CONTENT */
+
+#stacklyHeroContentBox{
+max-width:750px;
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:20px;
+align-items:center;
+}
+
+/* TITLE */
+
+#stacklyHeroHeading{
+font-size:60px;
+font-weight:bold;
+}
+
+/* TEXT */
+
+#stacklyHeroPara{
+font-size:18px;
+line-height:1.6;
+color:#e5e5e5;
+}
+
+/* BUTTON GROUP */
+
+#stacklyHeroBtnGroup{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+/* BUTTON */
+
+.stacklyHeroButton{
+padding:14px 34px;
+border-radius:40px;
+text-decoration:none;
+font-weight:bold;
+font-size:16px;
+transition:0.3s;
+}
+
+/* BUTTON COLORS */
+
+#stacklyBtnShop{
+background:#22c55e;
+color:white;
+}
+
+#stacklyBtnShop:hover{
+background:#16a34a;
+}
+
+#stacklyBtnExplore{
+background:white;
+color:#222;
+}
+
+#stacklyBtnExplore:hover{
+background:#e5e5e5;
+}
+
+/* SCROLL ARROW */
+
+#stacklyScrollIcon{
+position:absolute;
+bottom:40px;
+font-size:28px;
+animation:stacklyArrowMove 1.5s infinite;
+}
+
+@keyframes stacklyArrowMove{
+
+0%{transform:translateY(0)}
+50%{transform:translateY(10px)}
+100%{transform:translateY(0)}
+
+}
+
+/* CURVE SHAPE */
+
+#stacklyHeroCurve{
+position:absolute;
+bottom:0;
+width:100%;
+height:120px;
+background:white;
+border-top-left-radius:80% 100%;
+border-top-right-radius:80% 100%;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyHeroHeading{
+font-size:36px;
+}
+
+#stacklyHeroPara{
+font-size:15px;
+}
+
+.stacklyHeroButton{
+width:100%;
+max-width:230px;
+}
+
+#stacklyScrollIcon{
+bottom:25px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<section id="stacklyHeroMain">
+
+<video autoplay muted loop playsinline id="stacklyHeroVideoBg">
+<source src="137247-766338227_medium.mp4" type="video/mp4">
+</video>
+
+<div id="stacklyHeroOverlayBg"></div>
+
+<div id="stacklyHeroContentBox">
+
+<h1 id="stacklyHeroHeading">
+Stackly Grocery Mart
+</h1>
+
+<p id="stacklyHeroPara">
+Fresh groceries delivered in minutes. Shop vegetables, fruits, dairy products and daily essentials at the best prices.
+</p>
+
+<div id="stacklyHeroBtnGroup">
+
+<a href="4041.html" class="stacklyHeroButton" id="stacklyBtnShop">
+Shop Now
+</a>
+
+<a href="4041.html" class="stacklyHeroButton" id="stacklyBtnExplore">
+Explore Products
+</a>
+
+</div>
+
+</div>
+
+<div id="stacklyScrollIcon">
+⬇
+</div>
+
+<div id="stacklyHeroCurve"></div>
+
+</section>
+
+</body>
+</html>
+
+
+<style>
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+/* HERO SECTION */
+
+#stacklyHero{
+position:relative;
+width:100%;
+min-height:70vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+#stacklyHero video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+top:0;
+left:0;
+z-index:-2;
+}
+
+#stacklyHeroOverlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+#stacklyHeroContent{
+max-width:700px;
+padding:20px;
+}
+
+#stacklyHeroTitle{
+font-size:48px;
+margin-bottom:10px;
+}
+
+#stacklyHeroText{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.stacklyHeroBtn{
+display:inline-block;
+padding:12px 28px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+border-radius:25px;
+margin:5px;
+}
+
+/* CATEGORY SECTION */
+
+#stacklyCategorySection{
+max-width:1300px;
+margin:auto;
+padding:50px 20px;
+}
+
+#stacklyCategoryTitle{
+font-size:24px;
+margin-bottom:25px;
+}
+
+/* GRID */
+
+#stacklyCategoryGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:20px;
+}
+
+/* CARD */
+
+.stacklyCategoryCard{
+background:white;
+border-radius:15px;
+padding:15px;
+text-align:center;
+transition:0.3s;
+text-decoration:none;
+color:#333;
+}
+
+.stacklyCategoryCard:hover{
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* IMAGE */
+
+.stacklyCategoryCard img{
+width:70px;
+height:70px;
+object-fit:contain;
+margin-bottom:10px;
+}
+
+/* TEXT */
+
+.stacklyCategoryName{
+font-size:15px;
+font-weight:600;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyHeroTitle{
+font-size:32px;
+}
+
+#stacklyHeroText{
+font-size:15px;
+}
+
+.stacklyCategoryCard img{
+width:55px;
+height:55px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<!-- SNACKS & DRINKS SECTION -->
+
+<section id="stacklyCategorySection">
+
+<h2 id="stacklyCategoryTitle">Home Items</h2>
+
+<div id="stacklyCategoryGrid">
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="apple.webp">
+<div class="stacklyCategoryName">Apple</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="banana.webp">
+<div class="stacklyCategoryName">Banana</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="cofee.webp">
+<div class="stacklyCategoryName">Cofee</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="facecream.webp">
+<div class="stacklyCategoryName">Face Cream</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="sugar.webp">
+<div class="stacklyCategoryName">Sugar</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="tomato.webp">
+<div class="stacklyCategoryName">Tomato</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="soap.webp">
+<div class="stacklyCategoryName">Soap</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="toothpaste.webp">
+<div class="stacklyCategoryName">Tooth Paste</div>
+</a>
+
+</div>
+
+</section>
+
+</body>
+</html>
+
+<!-- SNACKS & DRINKS SECTION -->
+
+<section id="stacklyCategorySection">
+
+<h2 id="stacklyCategoryTitle">Electronis</h2>
+
+<div id="stacklyCategoryGrid">
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile1.webp">
+<div class="stacklyCategoryName">lenovo</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile2.webp">
+<div class="stacklyCategoryName">vivo</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile3.webp">
+<div class="stacklyCategoryName">oppo</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile4.webp">
+<div class="stacklyCategoryName">lava</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile5.webp">
+<div class="stacklyCategoryName">motorola</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile6.webp">
+<div class="stacklyCategoryName">Iphone</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile7.webp">
+<div class="stacklyCategoryName">Karbon</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Mobile8.webp">
+<div class="stacklyCategoryName">Redmi</div>
+</a>
+
+</div>
+
+</section>
+<!-- SNACKS & DRINKS SECTION -->
+
+<section id="stacklyCategorySection">
+
+<h2 id="stacklyCategoryTitle">Jewellery</h2>
+
+<div id="stacklyCategoryGrid">
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew1.webp">
+<div class="stacklyCategoryName">Ring</div>
+</a>
+
+<a href="404.html" class="stacklyCategoryCard">
+<img src="Jew2.webp">
+<div class="stacklyCategoryName">Neck Chain</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew3.webp">
+<div class="stacklyCategoryName">Chain</div>
+</a>
+
+<a href="404.html" class="stacklyCategoryCard">
+<img src="Jew4.webp">
+<div class="stacklyCategoryName">Frozen</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew5.webp">
+<div class="stacklyCategoryName"> Cravings</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew6.webp">
+<div class="stacklyCategoryName">Gold Chain</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew7.webp">
+<div class="stacklyCategoryName">Munchies</div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Jew8.webp">
+<div class="stacklyCategoryName">Gold</div>
+</a>
+
+</div>
+
+</section>
+<!-- SNACKS & DRINKS SECTION -->
+
+<section id="stacklyCategorySection">
+
+<h2 id="stacklyCategoryTitle">Beauty</h2>
+
+<div id="stacklyCategoryGrid">
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty1.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty2.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty3.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty4.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty5.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty6.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty7.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+<a href="4041.html" class="stacklyCategoryCard">
+<img src="Beauty8.webp">
+<div class="stacklyCategoryName"></div>
+</a>
+
+</div>
+
+</section>
+
+
+<style>
+
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+/* HERO SECTION */
+
+#stacklyHero{
+position:relative;
+width:100%;
+height:85vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
+}
+
+#stacklyHero video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+top:0;
+left:0;
+z-index:-2;
+}
+
+#stacklyHeroOverlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.55);
+z-index:-1;
+}
+
+#stacklyHeroContent{
+max-width:700px;
+padding:20px;
+}
+
+#stacklyHeroContent h1{
+font-size:50px;
+margin-bottom:10px;
+}
+
+#stacklyHeroContent p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.stacklyHeroBtn{
+display:inline-block;
+padding:12px 26px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+border-radius:25px;
+margin:5px;
+}
+
+/* PROMO BANNER */
+
+#stacklyPromoBanner{
+max-width:1200px;
+margin:60px auto;
+background:linear-gradient(90deg,#8a5c3b,#c89c74);
+border-radius:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+padding:40px;
+color:white;
+align-items:center;
+}
+
+#stacklyBannerImg img{
+width:100%;
+max-width:280px;
+}
+
+#stacklyBannerContent h2{
+font-size:36px;
+margin-bottom:10px;
+}
+
+#stacklyBannerContent p{
+font-size:17px;
+margin-bottom:15px;
+}
+
+#stacklyOffer{
+background:rgba(255,255,255,0.2);
+padding:10px 16px;
+border-radius:10px;
+display:inline-block;
+margin-bottom:15px;
+}
+
+#stacklyExploreBtn{
+display:inline-block;
+padding:12px 26px;
+background:#ffd166;
+color:#333;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyHeroContent h1{
+font-size:32px;
+}
+
+#stacklyHeroContent p{
+font-size:15px;
+}
+
+#stacklyPromoBanner{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+#stacklyBannerImg img{
+margin:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- HERO SECTION -->
+
+<section id="stacklyHero">
+
+<video autoplay muted loop playsinline>
+<source src="1006-142621176_small.mp4">
+</video>
+
+<div id="stacklyHeroOverlay"></div>
+
+<div id="stacklyHeroContent">
+
+<h1>Stackly Grocery Mart</h1>
+
+<p>Fresh groceries delivered to your door in minutes.</p>
+
+<a href="4041.html" class="stacklyHeroBtn">Shop Now</a>
+<a href="4041.html" class="stacklyHeroBtn">Browse Items</a>
+
+</div>
+
+</section>
+
+
+<!-- PROMO BANNER -->
+
+<section id="stacklyPromoBanner">
+
+<div id="stacklyBannerImg">
+<img src="Fash10.webp">
+</div>
+
+<div id="stacklyBannerContent">
+
+<h2>Fresh Groceries. Better Prices.</h2>
+
+<p>
+Exchange your old shopping habits with faster delivery and better grocery prices at Stackly Grocery Mart.
+</p>
+
+<div id="stacklyOffer">
+Up to 40% OFF on vegetables & fruits
+</div>
+
+<br>
+
+<a href="4041.html" id="stacklyExploreBtn">Explore Now</a>
+
+</div>
+
+</section>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* SECTION */
+
+#stacklyDownloadSection{
+position:relative;
+padding:80px 5%;
+background:url("tomato.webp") center/cover no-repeat;
+color:#fff;
+}
+
+/* DARK OVERLAY */
+
+#stacklyDownloadSection::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(5,20,45,0.85);
+z-index:1;
+}
+
+/* CONTAINER */
+
+#stacklyDownloadContainer{
+position:relative;
+z-index:2;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:40px;
+flex-wrap:wrap;
+}
+
+/* TEXT */
+
+#stacklyDownloadText{
+flex:1;
+min-width:280px;
+}
+
+#stacklyDownloadText h2{
+font-size:34px;
+margin-bottom:15px;
+}
+
+#stacklyDownloadText p{
+font-size:15px;
+line-height:1.6;
+opacity:0.9;
+margin-bottom:18px;
+}
+
+/* QR */
+
+#stacklyDownloadQR{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+}
+
+#stacklyDownloadQR span{
+font-size:14px;
+}
+
+#stacklyDownloadQR img{
+width:110px;
+background:#fff;
+padding:8px;
+border-radius:10px;
+}
+
+/* BUTTONS */
+
+#stacklyDownloadButtons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.stacklyStoreBtn{
+background:#000;
+color:#fff;
+padding:14px 25px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+.stacklyStoreBtn:hover{
+background:#111;
+transform:translateY(-4px);
+}
+
+.stacklyStoreBtn span{
+font-size:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyDownloadContainer{
+flex-direction:column;
+text-align:center;
+}
+
+#stacklyDownloadButtons{
+justify-content:center;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="stacklyDownloadSection">
+
+<div id="stacklyDownloadContainer">
+
+<!-- TEXT -->
+
+<div id="stacklyDownloadText">
+
+<h2>Get 10-Minute Delivery with Stackly Mart</h2>
+
+<p>
+Experience ultra-fast grocery delivery with Stackly Mart. 
+Order fresh vegetables, fruits, dairy products, snacks and everyday essentials 
+and receive them at your doorstep in just <strong>10 minutes</strong>.
+</p>
+
+<p>
+Download the Stackly mobile app to enjoy exclusive offers, quick checkout, 
+live order tracking and a seamless shopping experience anytime.
+</p>
+
+</div>
+
+<!-- QR -->
+
+<div id="stacklyDownloadQR">
+
+<span>Scan to Download</span>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=stacklymart">
+
+</div>
+
+<!-- BUTTONS -->
+
+<div id="stacklyDownloadButtons">
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span></span>
+Download on App Store
+</a>
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span>▶</span>
+Get it on Google Play
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+</body>
+</html>
+
+
+
+<footer class="stackly-footer">
+
+<div class="footer-container">
+
+    <!-- LEFT ABOUT -->
+    <div class="footer-about">
+        <img src="stacklylogo (1).webp" class="footer-logo">
+
+        <p>
+        Stackly Digital is a creative digital marketing agency helping
+        brands grow online with powerful strategies, branding, and
+        performance marketing solutio<!DOCTYPE html>
+
+
+
+        <div class="footer-social">
+            <a href="4041.html"><i class="fa-brands fa-instagram"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="home.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="beauty.html">Beauty</a>
+        <a href="jewelary.html">Jewellary</a>
+        <a href="contact.html">Contact</a>
+        
+    </div>
+
+    <!-- SERVICES -->
+    <div class="footer-links">
+        <h4>Services</h4>
+        <a href="4041.html">Sell on Stackly</a>
+        <a href="4041.html">Delivery on Stackly</a>
+        <a href="4041.html">Social Media </a>
+        <a href="4041.html">Google Ads</a>
+        <a href="4041.html">Press</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-contact">
+        <h4>Contact Us</h4>
+
+        <p><i class="fa-solid fa-location-dot"></i> Bangalore, India</p>
+        <p><i class="fa-solid fa-phone"></i> +91 90352 78124</p>
+        <p><i class="fa-solid fa-envelope"></i> hello@stacklymart.com</p>
+
+        <a href="4041.html" class="footer-btn">Custmor Care</a>
+    </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="footer-bottom">
+    <p>© 2026 Stackly Mart. All Rights Reserved.</p>
+
+    <div class="footer-policy">
+        <a href="4041.html">Privacy Policy</a>
+        <a href="4041.html">Terms & Conditions</a>
+    </div>
+</div>
+
+</footer>
+<style>
+
+/* ================= FOOTER ================= */
+.stackly-footer{
+    background:#0f0f0f;
+    color:#ccc;
+    margin-top:120px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 20px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.3fr;
+    gap:50px;
+}
+
+/* LOGO + ABOUT */
+.footer-logo{
+    width:170px;
+    margin-bottom:18px;
+}
+
+.footer-about p{
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:22px;
+    color:#aaa;
+}
+
+/* SOCIAL ICONS */
+.footer-social a{
+    width:36px;
+    height:36px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#1b1b1b;
+    color:#fff;
+    border-radius:50%;
+    margin-right:8px;
+    transition:.3s;
+}
+
+.footer-social a:hover{
+    background:#18c97a;
+    transform:translateY(-3px);
+}
+
+/* LINKS */
+.footer-links h4,
+.footer-contact h4{
+    color:#fff;
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+.footer-links a{
+    display:block;
+    color:#bbb;
+    text-decoration:none;
+    margin-bottom:12px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:#18c97a;
+    padding-left:6px;
+}
+
+/* CONTACT */
+.footer-contact p{
+    font-size:14px;
+    margin-bottom:12px;
+    color:#bbb;
+}
+
+.footer-contact i{
+    color:#18c97a;
+    margin-right:8px;
+}
+
+.footer-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#18c97a;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-btn:hover{
+    background:#0f9d58;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    border-top:1px solid #222;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1200px;
+    margin:auto;
+    font-size:13px;
+    color:#888;
+}
+
+.footer-policy a{
+    color:#888;
+    margin-left:18px;
+    text-decoration:none;
+}
+
+.footer-policy a:hover{
+    color:#18c97a;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+    }
+}
+
+@media(max-width:600px){
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .footer-social a{
+        margin-bottom:8px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+}
+@media(max-width:600px){
+
+    /* stack columns */
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:left;
+    }
+
+    /* about section */
+    .footer-about{
+        text-align:left;
+    }
+
+    .footer-about p{
+        text-align:left;
+    }
+
+    /* social icons left */
+    .footer-social{
+        justify-content:flex-start;
+    }
+
+    /* links left */
+    .footer-links{
+        text-align:left;
+    }
+
+    .footer-links a{
+        text-align:left;
+    }
+
+    /* contact section */
+    .footer-contact{
+        text-align:left;
+    }
+
+    .footer-contact p{
+        text-align:left;
+    }
+
+    /* bottom bar */
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+        gap:10px;
+    }
+
+    .footer-policy{
+        display:flex;
+        gap:14px;
+    }
+
+    .footer-policy a{
+        margin-left:0;
+    }
+}
+</style>

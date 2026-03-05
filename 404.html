@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Stackly Mart</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+/* ===== RESET ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+overflow:hidden;
+color:#fff;
+}
+
+/* ===== CONTAINER ===== */
+.sm404-container{
+text-align:center;
+padding:40px 20px;
+max-width:600px;
+}
+
+/* BIG 404 */
+.sm404-number{
+font-size:140px;
+font-weight:900;
+letter-spacing:5px;
+margin-bottom:10px;
+animation:float 3s ease-in-out infinite;
+}
+
+/* TITLE */
+.sm404-title{
+font-size:28px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+/* DESCRIPTION */
+.sm404-text{
+font-size:16px;
+opacity:0.9;
+margin-bottom:30px;
+}
+
+/* BUTTONS */
+.sm404-buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.sm404-btn{
+text-decoration:none;
+padding:12px 25px;
+border-radius:30px;
+font-weight:600;
+transition:.3s;
+}
+
+.sm404-primary{
+background:#fff;
+color:#2563eb;
+}
+
+.sm404-primary:hover{
+background:#000;
+color:#fff;
+}
+
+.sm404-outline{
+border:2px solid #fff;
+color:#fff;
+}
+
+.sm404-outline:hover{
+background:#fff;
+color:#2563eb;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+.sm404-number{
+font-size:80px;
+}
+
+.sm404-title{
+font-size:20px;
+}
+
+.sm404-text{
+font-size:14px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="sm404-container">
+
+<div class="sm404-number">404</div>
+
+<div class="sm404-title">
+Oops! Page Not Found
+</div>
+
+<div class="sm404-text">
+The page you're looking for doesn’t exist or may have been moved.
+Let’s get you back to shopping at Stackly Mart ⚡
+</div>
+
+<div class="sm404-buttons">
+<a href="index.html" class="sm404-btn sm404-primary">
+Back to Home
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

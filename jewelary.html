@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Mart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:2000px;
+background:#f5f5f5;
+}
+
+/* ================= NAVBAR ================= */
+
+.header{
+width:100%;
+height:80px;
+background:rgb(65,65,85);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 60px;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
+
+.logo img{
+width:185px;
+}
+
+.nav-menu{
+display:flex;
+gap:18px;
+align-items:center;
+}
+
+.nav-item{
+position:relative;
+}
+
+.nav-item>a{
+text-decoration:none;
+color:#cfd1cc;
+padding:10px 22px;
+border-radius:30px;
+border:1px solid #cfcfcf;
+font-size:15px;
+transition:.3s;
+display:flex;
+align-items:center;
+gap:6px;
+}
+
+.nav-item>a:hover{
+background:#fff;
+color:#000;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+position:absolute;
+top:100%;
+margin-top:8px;
+left:0;
+background:#fff;
+width:220px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+padding:10px 0;
+opacity:0;
+visibility:hidden;
+transform:translateY(10px);
+transition:.3s;
+}
+
+.nav-item.active .dropdown{
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+}
+
+.dropdown a{
+display:block;
+padding:12px 18px;
+text-decoration:none;
+color:#222;
+font-size:14px;
+}
+
+.dropdown a:hover{
+background:#f3f3f3;
+}
+
+/* LOGIN BUTTON */
+
+.call-btn{
+background:#ff3b0a;
+color:#fff;
+padding:14px 26px;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+}
+
+/* HAMBURGER */
+
+.hamburger{
+width:32px;
+display:none;
+flex-direction:column;
+cursor:pointer;
+}
+
+.hamburger span{
+height:3px;
+background:#cccaca;
+margin:5px 0;
+border-radius:3px;
+}
+
+/* MOBILE DRAWER */
+
+.mobile-drawer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#fff;
+padding:30px 25px;
+transform:translateX(-100%);
+transition:.45s;
+z-index:2000;
+overflow-y:auto;
+}
+
+.mobile-drawer.active{
+transform:translateX(0);
+}
+
+.drawer-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.mobile-drawer a{
+font-size:20px;
+padding:16px 0;
+text-decoration:none;
+color:#111;
+border-bottom:1px solid #eee;
+display:block;
+}
+
+/* MOBILE DROPDOWN */
+
+.mobile-parent{
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+padding:16px 0;
+border-bottom:1px solid #eee;
+}
+
+.mobile-submenu{
+display:none;
+padding-left:15px;
+}
+
+.mobile-submenu a{
+font-size:17px;
+color:#555;
+border:none;
+padding:10px 0;
+}
+
+.mobile-parent.active i{
+transform:rotate(180deg);
+}
+
+.drawer-btn{
+margin-top:20px;
+background:#ff3b0a;
+color:#fff;
+padding:16px;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:600;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+.nav-menu,
+.call-btn{
+display:none;
+}
+
+.hamburger{
+display:flex;
+}
+
+.header{
+padding:0 12px;
+}
+
+.logo img{
+width:150px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="header">
+
+<div class="logo">
+<img src="stacklylogo (1).webp" alt="logo">
+</div>
+
+<nav class="nav-menu">
+
+<div class="nav-item" id="homeDropdown">
+<a href="index.html">Home <i class="fa-solid fa-chevron-down"></i></a>
+
+<div class="dropdown">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+
+</div>
+
+<div class="nav-item"><a href="dashboard.html">Dashboard</a></div>
+<div class="nav-item"><a href="beauty.html">Beauty</a></div>
+<div class="nav-item"><a href="jewelary.html">Jewellery</a></div>
+<div class="nav-item"><a href="contact.html">Contact</a></div>
+
+</nav>
+
+<a href="login.html" class="call-btn">Login</a>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</header>
+
+<!-- MOBILE MENU -->
+
+<div class="mobile-drawer" id="mobileDrawer">
+
+<div class="drawer-header">
+<h3>STACKLY MART</h3>
+<span id="closeMenu">✕</span>
+</div>
+
+<div class="mobile-parent" id="mobileHome">
+<span>Home</span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="mobile-submenu" id="mobileSub">
+<a href="index.html">Home1</a>
+<a href="home.html">Home2</a>
+</div>
+
+<a href="dashboard.html">Dashboard</a> <a href="beauty.html">Beauty</a>  <a href="jewelary.html">Jewellery</a> <a href="contact.html">Contact</a>
+
+<a href="log1.html">
+   <button class="drawer-btn">Login</button>
+</a>
+
+</div>
+
+<script>
+
+/* HAMBURGER */
+
+const hamburger=document.getElementById("hamburger");
+const drawer=document.getElementById("mobileDrawer");
+const closeMenu=document.getElementById("closeMenu");
+
+hamburger.onclick=()=>{drawer.classList.toggle("active");}
+closeMenu.onclick=()=>{drawer.classList.remove("active");}
+
+/* MOBILE DROPDOWN */
+
+const mobileHome=document.getElementById("mobileHome");
+const mobileSub=document.getElementById("mobileSub");
+
+mobileHome.onclick=()=>{
+mobileHome.classList.toggle("active");
+mobileSub.style.display=mobileSub.style.display==="block"?"none":"block";
+};
+
+/* DESKTOP DROPDOWN */
+
+const navItems=document.querySelectorAll(".nav-item");
+
+navItems.forEach(item=>{
+const link=item.querySelector("a");
+
+if(item.querySelector(".dropdown")){
+link.addEventListener("click",(e)=>{
+e.preventDefault();
+navItems.forEach(i=>{if(i!==item){i.classList.remove("active");}});
+item.classList.toggle("active");
+});
+}
+});
+
+/* CLICK OUTSIDE CLOSE */
+
+document.addEventListener("click",(e)=>{
+if(!e.target.closest(".nav-item")){
+navItems.forEach(i=>i.classList.remove("active"));
+}
+});
+
+</script>
+
+</body>
+</html>
+
+<style>
+
+/* ===== UNIQUE JEWELLERY HERO SECTION ===== */
+
+#stacklyJewelleryHeroSection{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url('Jew10.webp') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+color:#fff;
+font-family:'Poppins',sans-serif;
+}
+
+#stacklyJewelleryHeroContent{
+max-width:800px;
+animation:stacklyJewelleryFadeUp 1.5s ease;
+}
+
+#stacklyJewelleryHeroTitle{
+font-family:'Playfair Display',serif;
+font-size:60px;
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+#stacklyJewelleryHeroSubtitle{
+font-size:18px;
+margin-bottom:30px;
+opacity:0.9;
+}
+
+/* BUTTON */
+#stacklyJewelleryHeroButton{
+display:inline-block;
+padding:14px 35px;
+background:linear-gradient(90deg,#d4af37,#b8860b);
+color:#000;
+font-weight:600;
+border-radius:40px;
+text-decoration:none;
+transition:0.3s;
+}
+
+#stacklyJewelleryHeroButton:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(212,175,55,0.5);
+}
+
+/* ANIMATION */
+@keyframes stacklyJewelleryFadeUp{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1024px){
+#stacklyJewelleryHeroTitle{
+font-size:42px;
+}
+}
+
+@media(max-width:768px){
+#stacklyJewelleryHeroTitle{
+font-size:32px;
+}
+
+#stacklyJewelleryHeroSubtitle{
+font-size:14px;
+}
+
+#stacklyJewelleryHeroButton{
+padding:12px 25px;
+}
+}
+
+</style>
+</head>
+<body>
+
+<section id="stacklyJewelleryHeroSection">
+
+<div id="stacklyJewelleryHeroContent">
+
+<h1 id="stacklyJewelleryHeroTitle">
+Timeless Jewellery Collection
+</h1>
+
+<p id="stacklyJewelleryHeroSubtitle">
+Discover handcrafted elegance and luxury designs crafted to perfection.
+</p>
+
+<a href="4041.html" id="stacklyJewelleryHeroButton">
+Explore Collection →
+</a>
+
+</div>
+
+</section>
+
+</body>
+</html>
+
+<style>
+
+/* ===== GLOBAL ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#f5f5f5;
+}
+
+/* ===== HERO SECTION ===== */
+
+#stacklyPremiumHero{
+padding:60px 5%;
+}
+
+#stacklyPremiumHeroWrapper{
+background:linear-gradient(135deg,#5c3d2e,#a47551);
+border-radius:25px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:60px;
+gap:40px;
+color:#fff;
+overflow:hidden;
+}
+
+/* LEFT IMAGE */
+#stacklyPremiumHeroLeft{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+#stacklyPremiumHeroImage{
+width:100%;
+max-width:380px;
+border-radius:20px;
+object-fit:cover;
+}
+
+/* CENTER CONTENT */
+#stacklyPremiumHeroCenter{
+flex:1.5;
+}
+
+#stacklyPremiumHeroTitle{
+font-size:48px;
+font-weight:800;
+line-height:1.2;
+margin-bottom:20px;
+color:#ffd700;
+}
+
+#stacklyPremiumHeroDesc{
+font-size:18px;
+line-height:1.6;
+margin-bottom:30px;
+opacity:0.95;
+}
+
+/* OFFER BOX */
+#stacklyPremiumOfferBox{
+border:2px solid #ffd700;
+padding:18px 22px;
+border-radius:12px;
+background:rgba(0,0,0,0.25);
+font-size:16px;
+}
+
+/* RIGHT SIDE */
+#stacklyPremiumHeroRight{
+flex:1;
+text-align:center;
+}
+
+#stacklyPremiumBrandName{
+font-size:34px;
+font-weight:700;
+letter-spacing:3px;
+margin-bottom:10px;
+}
+
+#stacklyPremiumBrandTag{
+font-size:20px;
+color:#ffd700;
+margin-bottom:25px;
+}
+
+#stacklyPremiumHeroBtn{
+display:inline-block;
+padding:14px 35px;
+background:#ffd700;
+color:#000;
+font-weight:600;
+border-radius:35px;
+text-decoration:none;
+transition:0.3s;
+}
+
+#stacklyPremiumHeroBtn:hover{
+background:#fff;
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:1024px){
+
+#stacklyPremiumHeroWrapper{
+flex-direction:column;
+text-align:center;
+padding:40px 25px;
+}
+
+#stacklyPremiumHeroLeft{
+order:1;
+}
+
+#stacklyPremiumHeroCenter{
+order:2;
+}
+
+#stacklyPremiumHeroRight{
+order:3;
+}
+
+#stacklyPremiumHeroTitle{
+font-size:34px;
+}
+
+#stacklyPremiumHeroDesc{
+font-size:15px;
+}
+
+#stacklyPremiumHeroImage{
+max-width:250px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<section id="stacklyPremiumHero">
+
+<div id="stacklyPremiumHeroWrapper">
+
+<!-- LEFT -->
+<div id="stacklyPremiumHeroLeft">
+<img id="stacklyPremiumHeroImage"
+src="Jew7.webp"
+alt="Stackly Grocery">
+</div>
+
+<!-- CENTER -->
+<div id="stacklyPremiumHeroCenter">
+
+<h1 id="stacklyPremiumHeroTitle">
+Your Daily Freshness.<br>
+India’s Healthy Strength.
+</h1>
+
+<p id="stacklyPremiumHeroDesc">
+Exchange unhealthy habits for farm-fresh groceries.
+Shop premium fruits, vegetables and essentials at unbeatable prices.
+</p>
+
+<div id="stacklyPremiumOfferBox">
+Upto 30% Savings on Fresh Produce & Grocery Essentials.
+Special bulk exchange offers available now.
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div id="stacklyPremiumHeroRight">
+
+<div id="stacklyPremiumBrandName">
+STACKLY
+</div>
+
+<div id="stacklyPremiumBrandTag">
+GROCERY MART
+</div>
+
+<a href="4041.html" id="stacklyPremiumHeroBtn">
+Explore Now →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<title>Stackly Mart Jewellery</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html,body{
+width:100%;
+overflow-x:hidden;
+background:#f9f6f2;
+padding-bottom:90px;
+}
+
+/* PRODUCT GRID */
+
+#stacklyJewelleryProducts{
+padding:40px 5%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.stacklyJewelleryCard{
+background:#fff;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s;
+}
+
+.stacklyJewelleryCard:hover{
+transform:translateY(-5px);
+}
+
+.stacklyJewelleryCard img{
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:10px;
+cursor:pointer;
+}
+
+.stacklyJewelleryTitle{
+font-size:14px;
+margin:10px 0;
+}
+
+.stacklyJewelleryPrice{
+color:#b8860b;
+font-weight:600;
+margin-bottom:10px;
+}
+
+.stacklyJewelleryAddBtn{
+background:#b8860b;
+color:#fff;
+border:none;
+padding:8px 18px;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* CART BAR */
+
+#stacklyJewelleryCartBar{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#000;
+color:#fff;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+z-index:1000;
+font-size:14px;
+}
+
+/* CART SIDEBAR */
+
+#stacklyJewelleryCart{
+position:fixed;
+right:-420px;
+top:0;
+width:380px;
+max-width:100%;
+height:100%;
+background:#fff;
+box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+padding:20px;
+transition:0.4s;
+overflow-y:auto;
+z-index:2000;
+}
+
+#stacklyJewelleryCart.active{
+right:0;
+}
+
+#stacklyJewelleryClose{
+position:absolute;
+right:20px;
+top:15px;
+cursor:pointer;
+font-size:20px;
+}
+
+.stacklyJewelleryCartItem{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+border-bottom:1px solid #eee;
+padding-bottom:10px;
+font-size:14px;
+}
+
+.stacklyJewelleryQty{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.stacklyJewelleryQty button{
+background:#b8860b;
+border:none;
+color:#fff;
+width:25px;
+height:25px;
+border-radius:5px;
+cursor:pointer;
+}
+
+#stacklyJewellerySummary{
+margin-top:20px;
+font-size:14px;
+}
+
+#stacklyJewelleryCheckout{
+margin-top:20px;
+background:#b8860b;
+color:#fff;
+padding:12px;
+border:none;
+width:100%;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+/* MOBILE FIX */
+
+@media(max-width:768px){
+
+#stacklyJewelleryProducts{
+grid-template-columns:repeat(2,1fr);
+padding:20px;
+}
+
+.stacklyJewelleryCard img{
+height:140px;
+}
+
+#stacklyJewelleryCart{
+width:100%;
+right:-100%;
+}
+
+#stacklyJewelleryCart.active{
+right:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="stacklyJewelleryProducts"></section>
+
+<div id="stacklyJewelleryCartBar" onclick="stacklyJewelleryToggleCart()">
+
+<span>🛒 View Cart (<span id="stacklyJewelleryCount">0</span>)</span>
+
+<span>Total ₹<span id="stacklyJewelleryBarTotal">0</span></span>
+
+</div>
+
+<div id="stacklyJewelleryCart">
+
+<span id="stacklyJewelleryClose" onclick="stacklyJewelleryToggleCart()">✖</span>
+
+<h2>Your Cart</h2>
+
+<div id="stacklyJewelleryCartItems"></div>
+
+<div id="stacklyJewellerySummary">
+
+<p>Subtotal: ₹<span id="stacklyJewellerySubtotal">0</span></p>
+
+<p>Tax (5%): ₹<span id="stacklyJewelleryTax">0</span></p>
+
+<p>Delivery: ₹150</p>
+
+<strong>Total: ₹<span id="stacklyJewelleryTotal">0</span></strong>
+
+</div>
+
+<button id="stacklyJewelleryCheckout" onclick="window.location.href='404.html'">
+Checkout
+</button>
+
+</div>
+
+<script>
+
+let stacklyJewelleryProductsData=[
+
+{id:1,name:"Gold Necklace",price:3200,image:"Jew1.webp"},
+{id:2,name:"Diamond Ring",price:5400,image:"Jew2.webp"},
+{id:3,name:"Gold Bangles",price:4200,image:"Jew3.webp"},
+{id:4,name:"Bridal Necklace",price:7500,image:"Jew4.webp"},
+{id:5,name:"Pearl Earrings",price:2800,image:"Jew5.webp"},
+{id:6,name:"Gold Chain",price:3500,image:"Jew6.webp"},
+{id:7,name:"Diamond Pendant",price:6100,image:"Jew7.webp"},
+{id:8,name:"Wedding Bangles",price:7200,image:"Jew8.webp"},
+{id:9,name:"Gold Anklet",price:2600,image:"Jew9.webp"},
+{id:10,name:"Luxury Necklace",price:8800,image:"Jew10.webp"},
+{id:11,name:"Silver Bracelet",price:2400,image:"Jew11.webp"},
+{id:12,name:"Diamond Studs",price:5000,image:"Jew12.webp"},
+{id:13,name:"Gold Ring",price:3000,image:"Jew13.webp"},
+{id:14,name:"Designer Necklace",price:8200,image:"Jew14.webp"},
+{id:15,name:"Luxury Earrings",price:4300,image:"Jew15.webp"},
+{id:16,name:"Gold Pendant",price:3600,image:"Jew16.webp"},
+{id:17,name:"Diamond Bracelet",price:6700,image:"Jew17.webp"},
+{id:18,name:"Wedding Jewellery",price:9500,image:"Jew18.webp"},
+{id:19,name:"Classic Necklace",price:4800,image:"Jew5.webp"},
+{id:20,name:"Royal Gold Set",price:11000,image:"Jew9.webp"}
+
+];
+
+let stacklyJewelleryCartData={};
+
+let container=document.getElementById("stacklyJewelleryProducts");
+
+stacklyJewelleryProductsData.forEach(product=>{
+
+let div=document.createElement("div");
+div.className="stacklyJewelleryCard";
+
+div.innerHTML=`
+
+<a href="404.html">
+<img src="${product.image}">
+</a>
+
+<div class="stacklyJewelleryTitle">${product.name}</div>
+<div class="stacklyJewelleryPrice">₹${product.price}</div>
+
+<button class="stacklyJewelleryAddBtn"
+onclick="stacklyJewelleryAdd(${product.id})">
+Add
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+function stacklyJewelleryAdd(id){
+
+if(stacklyJewelleryCartData[id]){
+stacklyJewelleryCartData[id].qty++;
+}else{
+let product=stacklyJewelleryProductsData.find(p=>p.id===id);
+stacklyJewelleryCartData[id]={...product,qty:1};
+}
+
+stacklyJewelleryUpdate();
+
+}
+
+function stacklyJewelleryUpdate(){
+
+let items=document.getElementById("stacklyJewelleryCartItems");
+items.innerHTML="";
+
+let subtotal=0;
+let count=0;
+
+Object.values(stacklyJewelleryCartData).forEach(item=>{
+
+subtotal+=item.price*item.qty;
+count+=item.qty;
+
+items.innerHTML+=`
+
+<div class="stacklyJewelleryCartItem">
+
+<div>${item.name}</div>
+
+<div class="stacklyJewelleryQty">
+
+<button onclick="stacklyJewelleryQtyChange(${item.id},-1)">-</button>
+<span>${item.qty}</span>
+<button onclick="stacklyJewelleryQtyChange(${item.id},1)">+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+let tax=Math.round(subtotal*0.05);
+let total=subtotal+tax+150;
+
+document.getElementById("stacklyJewellerySubtotal").innerText=subtotal;
+document.getElementById("stacklyJewelleryTax").innerText=tax;
+document.getElementById("stacklyJewelleryTotal").innerText=total;
+document.getElementById("stacklyJewelleryCount").innerText=count;
+document.getElementById("stacklyJewelleryBarTotal").innerText=total;
+
+}
+
+function stacklyJewelleryQtyChange(id,change){
+
+if(stacklyJewelleryCartData[id]){
+
+stacklyJewelleryCartData[id].qty+=change;
+
+if(stacklyJewelleryCartData[id].qty<=0){
+delete stacklyJewelleryCartData[id];
+}
+
+stacklyJewelleryUpdate();
+
+}
+
+}
+
+function stacklyJewelleryToggleCart(){
+document.getElementById("stacklyJewelleryCart").classList.toggle("active");
+}
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+/* SECTION */
+
+#stacklyDownloadSection{
+position:relative;
+padding:80px 5%;
+background:url("tomato.webp") center/cover no-repeat;
+color:#fff;
+}
+
+/* DARK OVERLAY */
+
+#stacklyDownloadSection::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(5,20,45,0.85);
+z-index:1;
+}
+
+/* CONTAINER */
+
+#stacklyDownloadContainer{
+position:relative;
+z-index:2;
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:40px;
+flex-wrap:wrap;
+}
+
+/* TEXT */
+
+#stacklyDownloadText{
+flex:1;
+min-width:280px;
+}
+
+#stacklyDownloadText h2{
+font-size:34px;
+margin-bottom:15px;
+}
+
+#stacklyDownloadText p{
+font-size:15px;
+line-height:1.6;
+opacity:0.9;
+margin-bottom:18px;
+}
+
+/* QR */
+
+#stacklyDownloadQR{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:10px;
+}
+
+#stacklyDownloadQR span{
+font-size:14px;
+}
+
+#stacklyDownloadQR img{
+width:110px;
+background:#fff;
+padding:8px;
+border-radius:10px;
+}
+
+/* BUTTONS */
+
+#stacklyDownloadButtons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.stacklyStoreBtn{
+background:#000;
+color:#fff;
+padding:14px 25px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+font-size:14px;
+transition:0.3s;
+}
+
+.stacklyStoreBtn:hover{
+background:#111;
+transform:translateY(-4px);
+}
+
+.stacklyStoreBtn span{
+font-size:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+#stacklyDownloadContainer{
+flex-direction:column;
+text-align:center;
+}
+
+#stacklyDownloadButtons{
+justify-content:center;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section id="stacklyDownloadSection">
+
+<div id="stacklyDownloadContainer">
+
+<!-- TEXT -->
+
+<div id="stacklyDownloadText">
+
+<h2>Get 10-Minute Delivery with Stackly Mart</h2>
+
+<p>
+Experience ultra-fast grocery delivery with Stackly Mart. 
+Order fresh vegetables, fruits, dairy products, snacks and everyday essentials 
+and receive them at your doorstep in just <strong>10 minutes</strong>.
+</p>
+
+<p>
+Download the Stackly mobile app to enjoy exclusive offers, quick checkout, 
+live order tracking and a seamless shopping experience anytime.
+</p>
+
+</div>
+
+<!-- QR -->
+
+<div id="stacklyDownloadQR">
+
+<span>Scan to Download</span>
+
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=stacklymart">
+
+</div>
+
+<!-- BUTTONS -->
+
+<div id="stacklyDownloadButtons">
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span></span>
+Download on App Store
+</a>
+
+<a href="4041.html" class="stacklyStoreBtn">
+<span>▶</span>
+Get it on Google Play
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* SCROLL REVEAL */
+
+ScrollReveal().reveal('#stacklyDownloadText',{
+distance:'60px',
+duration:1200,
+origin:'left',
+reset:false
+});
+
+ScrollReveal().reveal('#stacklyDownloadQR',{
+distance:'60px',
+duration:1200,
+origin:'bottom',
+delay:200
+});
+
+ScrollReveal().reveal('#stacklyDownloadButtons',{
+distance:'60px',
+duration:1200,
+origin:'right',
+delay:400
+});
+
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
+
+<footer class="stackly-footer">
+
+<div class="footer-container">
+
+    <!-- LEFT ABOUT -->
+    <div class="footer-about">
+        <img src="stacklylogo (1).webp" class="footer-logo">
+
+        <p>
+        Stackly Digital is a creative digital marketing agency helping
+        brands grow online with powerful strategies, branding, and
+        performance marketing solutio<!DOCTYPE html>
+
+
+
+        <div class="footer-social">
+            <a href="4041.html"><i class="fa-brands fa-instagram"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="4041.html"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="home.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="beauty.html">Beauty</a>
+        <a href="jewelary.html">Jewellary</a>
+        <a href="contact.html">Contact</a>
+        
+    </div>
+
+    <!-- SERVICES -->
+    <div class="footer-links">
+        <h4>Services</h4>
+        <a href="4041.html">Sell on Stackly</a>
+        <a href="4041.html">Delivery on Stackly</a>
+        <a href="4041.html">Social Media </a>
+        <a href="4041.html">Google Ads</a>
+        <a href="4041.html">Press</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-contact">
+        <h4>Contact Us</h4>
+
+        <p><i class="fa-solid fa-location-dot"></i> Bangalore, India</p>
+        <p><i class="fa-solid fa-phone"></i> +91 90352 78124</p>
+        <p><i class="fa-solid fa-envelope"></i> hello@stacklymart.com</p>
+
+        <a href="4041.html" class="footer-btn">Custmor Care</a>
+    </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="footer-bottom">
+    <p>© 2026 Stackly Mart. All Rights Reserved.</p>
+
+    <div class="footer-policy">
+        <a href="4041.html">Privacy Policy</a>
+        <a href="4041.html">Terms & Conditions</a>
+    </div>
+</div>
+
+</footer>
+<style>
+
+/* ================= FOOTER ================= */
+.stackly-footer{
+    background:#0f0f0f;
+    color:#ccc;
+    margin-top:120px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 20px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.3fr;
+    gap:50px;
+}
+
+/* LOGO + ABOUT */
+.footer-logo{
+    width:170px;
+    margin-bottom:18px;
+}
+
+.footer-about p{
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:22px;
+    color:#aaa;
+}
+
+/* SOCIAL ICONS */
+.footer-social a{
+    width:36px;
+    height:36px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#1b1b1b;
+    color:#fff;
+    border-radius:50%;
+    margin-right:8px;
+    transition:.3s;
+}
+
+.footer-social a:hover{
+    background:#18c97a;
+    transform:translateY(-3px);
+}
+
+/* LINKS */
+.footer-links h4,
+.footer-contact h4{
+    color:#fff;
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+.footer-links a{
+    display:block;
+    color:#bbb;
+    text-decoration:none;
+    margin-bottom:12px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:#18c97a;
+    padding-left:6px;
+}
+
+/* CONTACT */
+.footer-contact p{
+    font-size:14px;
+    margin-bottom:12px;
+    color:#bbb;
+}
+
+.footer-contact i{
+    color:#18c97a;
+    margin-right:8px;
+}
+
+.footer-btn{
+    display:inline-block;
+    margin-top:15px;
+    background:#18c97a;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:6px;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.footer-btn:hover{
+    background:#0f9d58;
+}
+
+/* BOTTOM */
+.footer-bottom{
+    border-top:1px solid #222;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    max-width:1200px;
+    margin:auto;
+    font-size:13px;
+    color:#888;
+}
+
+.footer-policy a{
+    color:#888;
+    margin-left:18px;
+    text-decoration:none;
+}
+
+.footer-policy a:hover{
+    color:#18c97a;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+    }
+}
+
+@media(max-width:600px){
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .footer-social a{
+        margin-bottom:8px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+}
+@media(max-width:600px){
+
+    /* stack columns */
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:left;
+    }
+
+    /* about section */
+    .footer-about{
+        text-align:left;
+    }
+
+    .footer-about p{
+        text-align:left;
+    }
+
+    /* social icons left */
+    .footer-social{
+        justify-content:flex-start;
+    }
+
+    /* links left */
+    .footer-links{
+        text-align:left;
+    }
+
+    .footer-links a{
+        text-align:left;
+    }
+
+    /* contact section */
+    .footer-contact{
+        text-align:left;
+    }
+
+    .footer-contact p{
+        text-align:left;
+    }
+
+    /* bottom bar */
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+        gap:10px;
+    }
+
+    .footer-policy{
+        display:flex;
+        gap:14px;
+    }
+
+    .footer-policy a{
+        margin-left:0;
+    }
+}
+</style>

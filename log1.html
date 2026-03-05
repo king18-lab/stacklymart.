@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Account</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#6a11cb,#8e2de2);
+}
+
+/* HOME BUTTON */
+.home-btn{
+position:absolute;
+top:20px;
+left:20px;
+background:#fff;
+color:#333;
+padding:8px 16px;
+border-radius:30px;
+text-decoration:none;
+font-size:14px;
+font-weight:600;
+box-shadow:0 6px 18px rgba(0,0,0,.25);
+transition:.3s;
+z-index:10;
+}
+.home-btn:hover{
+background:#7b2ff7;
+color:#fff;
+}
+
+/* MAIN CARD */
+.container{
+width:950px;
+height:540px;
+background:#fff;
+border-radius:20px;
+overflow:hidden;
+display:flex;
+box-shadow:0 30px 80px rgba(0,0,0,.35);
+position:relative;
+}
+
+/* RIGHT SIDE */
+.right{
+width:50%;
+background:linear-gradient(135deg,#7b2ff7,#c026ff);
+color:#fff;
+padding:60px 45px;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+/* CURVE */
+.right svg{
+position:absolute;
+left:-220px;
+top:0;
+height:100%;
+}
+
+/* LEFT FORM */
+.left{
+width:50%;
+padding:45px;
+z-index:2;
+}
+
+h2{font-size:28px;margin-bottom:5px;}
+.sub{color:#666;margin-bottom:25px;}
+
+.input{margin-bottom:18px;}
+.input input{
+width:100%;
+padding:13px 15px;
+border-radius:30px;
+border:1px solid #e0e0e0;
+outline:none;
+font-size:14px;
+}
+.input input:focus{
+border-color:#8e2de2;
+box-shadow:0 0 0 3px rgba(142,45,226,.15);
+}
+
+/* FORGOT PASSWORD */
+.forgot{
+text-align:right;
+margin-top:-10px;
+margin-bottom:10px;
+}
+.forgot a{
+font-size:13px;
+color:#7b2ff7;
+text-decoration:none;
+font-weight:500;
+}
+.forgot a:hover{text-decoration:underline;}
+
+/* BUTTON */
+.btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:30px;
+background:linear-gradient(90deg,#7b2ff7,#c026ff);
+color:#fff;
+font-weight:600;
+cursor:pointer;
+margin-top:10px;
+}
+
+.switch{margin-top:14px;font-size:14px;}
+.switch span{color:#7b2ff7;font-weight:600;cursor:pointer;}
+
+.form{display:none;}
+.form.active{display:block;}
+
+/* MOBILE */
+@media(max-width:768px){
+.container{
+flex-direction:column;
+width:95%;
+height:auto;
+}
+.right{
+order:-1;
+text-align:center;
+padding:35px;
+}
+.right svg{display:none;}
+.left{width:100%;}
+.right{width:100%;}
+.home-btn{top:10px;left:10px;}
+}
+/* ===== MOBILE HOME BUTTON FIX ===== */
+@media(max-width:768px){
+
+.home-btn{
+position:fixed;
+top:14px;
+left:50%;
+transform:translateX(-50%);
+padding:9px 20px;
+font-size:13px;
+border-radius:40px;
+background:#ffffff;
+color:#6a11cb;
+box-shadow:0 8px 22px rgba(0,0,0,.25);
+z-index:9999;
+}
+
+/* slight glass effect */
+.home-btn::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:40px;
+background:linear-gradient(135deg,rgba(255,255,255,.6),rgba(255,255,255,.2));
+z-index:-1;
+}
+
+/* push content down so it doesn't overlap */
+body{
+padding-top:60px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<a href="home.html" class="home-btn">← Home</a>
+
+<div class="container">
+
+<!-- LEFT SIDE -->
+
+<div class="left">
+
+<!-- LOGIN -->
+
+<form id="loginForm" class="form active">
+<h2>Hello!</h2>
+<p class="sub">Sign in to your account</p>
+
+<div class="input">
+<input type="text" id="loginPhone" placeholder="Mobile Number" required>
+</div>
+
+<div class="input">
+<input type="password" placeholder="Password" required>
+</div>
+
+<div class="forgot">
+<a href="4041.html">Forgot password?</a>
+</div>
+
+<button class="btn" type="submit">SIGN IN</button>
+
+<div class="switch">
+Don't have account? <span onclick="showSignup()">Create</span>
+</div>
+</form>
+
+<!-- SIGNUP -->
+
+<form id="signupForm" class="form">
+<h2>Create Account</h2>
+<p class="sub">Register new user</p>
+
+<div class="input">
+<input type="text" id="name" placeholder="Full Name" required>
+</div>
+
+<div class="input">
+<input type="text" id="phone" placeholder="Mobile Number" required>
+</div>
+
+<div class="input">
+<input type="email" placeholder="Email Address" required>
+</div>
+
+<div class="input">
+<input type="password" placeholder="Password" required>
+</div>
+
+<button class="btn" type="submit">CREATE ACCOUNT</button>
+
+<div class="switch">
+Already registered? <span onclick="showLogin()">Login</span>
+</div>
+</form>
+
+</div>
+
+<!-- RIGHT SIDE -->
+
+<div class="right">
+
+<svg viewBox="0 0 300 600" preserveAspectRatio="none">
+<path fill="#ffffff"
+d="M300,0 C120,80 120,520 300,600 L0,600 L0,0 Z"/>
+</svg>
+
+<h1>Welcome Back!</h1>
+<p>Access your dashboard and continue your journey with Stackly.</p>
+
+</div>
+
+</div>
+
+<script>
+
+/* SWITCH */
+function showSignup(){
+loginForm.classList.remove("active");
+signupForm.classList.add("active");
+}
+function showLogin(){
+signupForm.classList.remove("active");
+loginForm.classList.add("active");
+}
+
+/* NAME LETTERS ONLY */
+document.getElementById("name").addEventListener("input",function(){
+this.value=this.value.replace(/[^a-zA-Z\s]/g,'');
+});
+
+/* MOBILE 10 DIGITS ONLY */
+function mobileCheck(el){
+el.value=el.value.replace(/[^0-9]/g,'');
+if(el.value.length>10) el.value=el.value.slice(0,10);
+}
+
+document.getElementById("phone").addEventListener("input",function(){mobileCheck(this);});
+document.getElementById("loginPhone").addEventListener("input",function(){mobileCheck(this);});
+
+/* SUBMIT REDIRECT */
+loginForm.addEventListener("submit",function(e){
+e.preventDefault();
+if(loginPhone.value.length!==10){
+alert("Enter valid 10 digit mobile number");
+return;
+}
+window.location.href="4041.html";
+});
+
+signupForm.addEventListener("submit",function(e){
+e.preventDefault();
+if(phone.value.length!==10){
+alert("Enter valid 10 digit mobile number");
+return;
+}
+window.location.href="4041.html";
+});
+
+</script>
+
+</body>
+</html>
